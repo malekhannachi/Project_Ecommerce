@@ -29,18 +29,30 @@
                     <h6 class="m-0 font-weight-bold text-primary">Add product's details</h6>
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="form-group">
+                    <form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
+                        <div class="form-group" >
                             <label for="name" id="name">Name : </label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" formControlName="name">
+                            <div *ngIf="name?.touched && name?.invalid">
+                                <small *ngIf="name?.errors?.required" class="text-danger">name is required<br></small>
+                                <small *ngIf="name?.errors?.pattern" class="text-danger">Invalid name<br></small>
+                              </div>
                         </div>
                         <div class="form-group">
                             <label for="description" id="desc">Description : </label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" formControlName="description">
+                            <div *ngIf="description?.touched && description?.invalid">
+                                <small *ngIf="description?.errors?.required" class="text-danger">description is required<br></small>
+                                <small *ngIf="description?.errors?.pattern" class="text-danger">Invalid description<br></small>
+                              </div>
                         </div>
                         <div class="form-group">
                             <label for="price" id="price">Price : </label>
-                            <input type="number" class="form-control">
+                            <input type="number" class="form-control" formControlName="price">
+                            <div *ngIf="price?.touched && price?.invalid">
+                                <small *ngIf="price?.errors?.required" class="text-danger">price is required<br></small>
+                               
+                              </div> 
                         </div>
                         <div class="form-group">
                             <label for="photo" id="name">Image : </label>
@@ -54,7 +66,7 @@
                                 <option>Laptops</option>
                             </select>
                         </div>
-                        <button class="btn btn-sm btn-primary mt-3">Add</button>
+                        <button class="btn btn-sm btn-primary mt-3" [disabled]="addProductForm.invalid">Add</button>
 
                     </form>
 

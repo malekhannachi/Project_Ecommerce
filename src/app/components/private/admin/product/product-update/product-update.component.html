@@ -30,19 +30,30 @@
                     </div>
 
                     <div class="card-body">
-                        <form>
+                        <form [formGroup]="updateProductForm" (ngSubmit)="updateProduct()">
                             <div class="form-group">
                                 <label for="name" id="name">Name : </label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" formControlName="name">
+                                <div *ngIf="name?.touched && name?.invalid">
+                                    <small *ngIf="name?.errors?.required" class="text-danger">name is required<br></small>
+                                    <small *ngIf="name?.errors?.pattern" class="text-danger">Invalid name<br></small>
+                                  </div>
                             </div>
                           
                                 <div class="form-group">
                                     <label for="description" id="desc">Description : </label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" formControlName="description">
+                                    <div *ngIf="description?.touched && description?.invalid">
+                                        <small *ngIf="description?.errors?.required" class="text-danger">description is required<br></small>
+                                        <small *ngIf="description?.errors?.pattern" class="text-danger">Invalid description<br></small>
+                                      </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="price" id="price">Price : </label>
-                                    <input type="number" class="form-control">
+                                    <label for="price" id="price" >Price : </label>
+                                    <input type="number" class="form-control" formControlName="price"> 
+                                    <div *ngIf="price?.touched && price?.invalid">
+                                        <small *ngIf="price?.errors?.required" class="text-danger">price is required<br></small>
+                                      </div> 
                                 </div>
                                 <div class="form-group">
                                     <label for="photo" id="img">Image : </label>
@@ -56,7 +67,7 @@
                                         <option>Laptops</option>
                                     </select>
                                 </div>
-                                <button class="btn btn-sm btn-warning mt-3">Update</button>
+                                <button class="btn btn-sm btn-warning mt-3" [disabled]="updateProductForm.invalid">Update</button>
                         </form>
                     </div>
                 </div>

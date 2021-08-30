@@ -16,34 +16,57 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                   </div>
-                  <form class="user">
+                  <form class="user" [formGroup]="registerForm" (ngSubmit)="addUser()">
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                          placeholder="First Name">
+                          placeholder="First Name" formControlName="firstname">
+                          <div *ngIf="firstname?.touched && firstname?.invalid">
+                            <small *ngIf="firstname?.errors?.required" class="text-danger">firstname is required<br></small>
+                            <small *ngIf="firstname?.errors?.pattern" class="text-danger">Invalid firstname<br></small>
+                        </div>
                       </div>
                       <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="exampleLastName"
-                          placeholder="Last Name">
+                          placeholder="Last Name" formControlName="lastname">
+                          <div *ngIf="lastname?.touched && lastname?.invalid">
+                            <small *ngIf="lastname?.errors?.required" class="text-danger">lastname is required<br></small>
+                            <small *ngIf="lastname?.errors?.pattern" class="text-danger">Invalid lastname<br></small>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                        placeholder="Email Address">
+                        placeholder="Email Address" formControlName="email">
+                        <div *ngIf="email?.touched && email?.invalid">
+                          <small *ngIf="email?.errors?.required" class="text-danger">email is required<br></small>
+                          <small *ngIf="email?.errors?.pattern" class="text-danger">Invalid email<br></small>
+                      </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="password" class="form-control form-control-user" id="exampleInputPassword"
-                          placeholder="Password">
+                          placeholder="Password" formControlName="password">
+                          <div *ngIf="password?.touched && password?.invalid">
+                            <small *ngIf="password?.errors?.required" class="text-danger">password is required<br></small>
+                            <small *ngIf="password?.errors?.minlength" class="text-danger">Invalid password<br></small>
+                        </div>
                       </div>
                       <div class="col-sm-6">
                         <input type="password" class="form-control form-control-user" id="exampleRepeatPassword"
-                          placeholder="Repeat Password">
+                          placeholder="Repeat Password" formControlName="rpeatpassword">
+                          <div *ngIf="rpeatpassword?.touched && rpeatpassword?.invalid">
+                            <small *ngIf="rpeatpassword?.errors?.required" class="text-danger">repeat password is required<br></small>
+                          
+                        </div>
+                        <div *ngIf="rpeatpassword?.valid && rpeatpassword?.value != password?.value" class="text-danger">
+                          The passwords entered do not match
+                      </div>
                       </div>
                     </div>
-                    <a href="./../index.html" class="btn btn-primary btn-user btn-block">
+                    <button [disabled]="registerForm.invalid || rpeatpassword?.value != rpeatpassword?.value"  class="btn btn-primary btn-user btn-block">
                       Register Account
-                    </a>
+                    </button>
                     <hr>
                     <a href="index.html" class="btn btn-google btn-user btn-block">
                       <i class="fab fa-google fa-fw"></i> Register with Google

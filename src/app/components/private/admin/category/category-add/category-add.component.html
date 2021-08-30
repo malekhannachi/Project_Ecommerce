@@ -30,11 +30,15 @@
           </div>
 
           <div class="card-body">
-        <form>
+        <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory()">
             <div class="form-group">
             <label for="name" id="name">Name : </label>
-            <input type="text" class="form-control form-control-sm">
-            <button class="btn btn-sm btn-primary mt-3">Add</button>
+            <input type="text" class="form-control form-control-sm" formControlName="name">
+            <div *ngIf="name?.touched && name?.invalid">
+              <small *ngIf="name?.errors?.required" class="text-danger">name is required<br></small>
+              <small *ngIf="name?.errors?.pattern" class="text-danger">Invalid name<br></small>
+            </div>
+            <button class="btn btn-sm btn-primary mt-3" [disabled]="addCategoryForm.invalid">Add</button>
         </div>
         </form>
     </div>
