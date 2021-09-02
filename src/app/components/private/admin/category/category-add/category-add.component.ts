@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Category } from 'src/app/models/category';
+import { CategoryService } from 'src/app/services/category.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-category-add',
   templateUrl: './category-add.component.html',
@@ -8,7 +12,10 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 export class CategoryAddComponent implements OnInit {
   addCategoryForm: FormGroup
 
-  constructor(private fb: FormBuilder) {
+  listCategory:any[]=[];
+
+  constructor(private fb: FormBuilder,private categorySerivce:CategoryService,private router:Router,
+    private toastr: ToastrService) {
 
     let formControls = {
       name: new FormControl('',[
@@ -30,9 +37,31 @@ export class CategoryAddComponent implements OnInit {
   }
 
   addCategory() {
-    console.log(this.addCategoryForm.value);
+    let data = this.addCategoryForm.value;
+    let category = new Category(undefined,data.name);
+   
+    this.categorySerivce.addCategory(category).subscribe(
+      res=>{
+       
+        this.router.navigate(['/admin/category/list']);
+        console.log(res);
+        this.toastr.success('', 'Category added Succesfull');
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+   
+  }
+ 
+
+  
 
   }
  
 
-}
+
+
+
+
+

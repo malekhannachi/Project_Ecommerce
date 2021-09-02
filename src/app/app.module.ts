@@ -23,7 +23,8 @@ import { OrdersManagementComponent } from './components/private/admin/order/orde
 import { OrdersDetailsComponent } from './components/private/admin/order/orders-details/orders-details.component';
 import { MyOrdersComponent } from './components/private/admin/client/my-orders/my-orders.component';
 import { MyOrdersDetailsComponent } from './components/private/admin/client/my-orders-details/my-orders-details.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +53,8 @@ import { MyOrdersDetailsComponent } from './components/private/admin/client/my-o
     BrowserModule,
     AppRoutingModule,
     FormsModule , 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule, ToastNoAnimationModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
