@@ -11,21 +11,6 @@ export class CategoriesListComponent implements OnInit {
   categoriesList:any[]=[]
   constructor(private categorySerivce:CategoryService) { }
 
-  delete(category:any ) {
-    let index = this.categoriesList.indexOf(category);
-    this.categoriesList.splice(index, 1);
-    this.categorySerivce.deleteCategory(category.id).subscribe(
-      res=>{
-        console.log(res);
-        
-      },
-      err =>{
-        console.log(err);
-      }
-    )
-  
-  }
- 
 
 
   ngOnInit(): void {
@@ -40,5 +25,24 @@ export class CategoriesListComponent implements OnInit {
     )
 
   }
+
+  deleteCategory(category:any) {
+    let index = this.categoriesList.indexOf(category);
+    this.categoriesList.splice(index,1);
+
+    this.categorySerivce.deleteCategory(category.id).subscribe(
+      res=>{
+        console.log(res);
+      },
+      err =>{
+        console.log(err);
+      }
+    )
+  }
+
+
+
+
+
 
 }

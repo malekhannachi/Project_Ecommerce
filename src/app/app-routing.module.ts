@@ -37,7 +37,7 @@ const routes: Routes = [
     path: 'admin/category/add', component: CategoryAddComponent
   },
   {
-    path: 'admin/category/update', component: CategoryUpdateComponent
+    path: 'admin/category/update/:id', component: CategoryUpdateComponent
   }
   ,
 

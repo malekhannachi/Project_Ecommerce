@@ -7,6 +7,8 @@ import { Category } from '../models/category';
 export class CategoryService {
   private addCategoryUrl = "http://localhost:8080/categories/add";
   private getAllCategoriesUrl ="http://localhost:8080/categories/all";
+  private getOneUserUrl = "http://localhost:8080/categories/one/"
+  private updateCategoryUrl = "http://localhost:8080/categories/update"
   private deleteCategoryUrl = "http://localhost:8080/categories/delete/";
   constructor(private http:HttpClient) { }
 
@@ -21,5 +23,11 @@ export class CategoryService {
    return this.http.delete<any>(this.deleteCategoryUrl+id);
  }
 
+ getOneUser(id: any) {
+  return this.http.get<any>(this.getOneUserUrl + id)
+}
 
+updateCategory(category:Category){
+  return this.http.patch<any>(this.updateCategoryUrl, category);
+}
 }
