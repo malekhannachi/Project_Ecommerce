@@ -9,12 +9,10 @@
       <h2>Categories </h2>
       <hr>
       <div class="card">
-        <ul id="categories" class="list-group list-group-flush"> 
-              <li style="cursor:pointer"  class="list-group-item">All</li>
-          
-              <li style="cursor:pointer"  class="list-group-item">Smartphones</li>
-          
-              <li style="cursor:pointer"  class="list-group-item">Laptops</li>
+        <ul id="categories" class="list-group list-group-flush" *ngFor="let category of categoriesList">  
+             
+            <li class="list-group-item" style="cursor:pointer"> {{category.name}}</li>
+            
           </ul>
       </div>
 
